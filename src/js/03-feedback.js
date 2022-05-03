@@ -28,7 +28,13 @@ function onFormSubmit(event) {
     event.preventDefault();
 
     const parseMessage = JSON.parse(localStorage.getItem(FORM_STORAGE))
+
+    if (formInputEl.value === '' || formTextareaEl.value === '') {
+    console.log('Please fill in all the required fields!');
+    } else {
     console.log(parseMessage);
+    }
+
     event.currentTarget.reset();
     localStorage.removeItem(FORM_STORAGE);
 }
