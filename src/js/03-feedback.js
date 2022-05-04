@@ -13,13 +13,12 @@ formEl.addEventListener('submit', onFormSubmit);
 
 populateTextarea();
 
-const formData = {};
+let formData = JSON.parse(localStorage.getItem(FORM_STORAGE)) || {};
 
 
 function onInputChanges(event) {
 
     formData[event.target.name] = event.target.value;
-
     localStorage.setItem(FORM_STORAGE, JSON.stringify(formData))
 }
 
@@ -27,16 +26,17 @@ function onInputChanges(event) {
 function onFormSubmit(event) {
     event.preventDefault();
 
-    const parseMessage = JSON.parse(localStorage.getItem(FORM_STORAGE))
-
     if (formInputEl.value === '' || formTextareaEl.value === '') {
-    console.log('Please fill in all the required fields!');
+        console.log('Please fill in all the required fields!');
+        return;
     } else {
-    console.log(parseMessage);
+        console.log(formData);
     }
 
     event.currentTarget.reset();
     localStorage.removeItem(FORM_STORAGE);
+
+    formData = {};
 }
 
 function populateTextarea() {
